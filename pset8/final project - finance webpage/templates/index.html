@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>{{ user_value }}</b></td>
+        </tfoot>
+        <tbody>
+            {% for row in rows %}
+                {%  set name = stock_name[loop.index-1] %}
+                {% set share_value = total_price[loop.index-1] %}
+                <tr>
+                    <td>{{ row['symbol'] }}</td>
+                    <td>{{ name }}</td>
+                    <td>{{ row['shares_owned'] }}</td>
+                    <td>${{ row['cost'] }}</td>
+                    <td>{{ share_value }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>Cash</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ user_cash }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
